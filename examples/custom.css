@@ -1,0 +1,102 @@
+.bwizard-steps {
+     display: inline-block;
+     margin: 0;
+     padding: 0;
+     background: #fff;
+}
+ .bwizard-steps .nav-item {
+     display: inline-block;
+     position: relative;
+     margin-right: 5px;
+     list-style: none;
+     zoom: 1;
+}
+ .bwizard-steps .nav-item .nav-link {
+     padding: 12px 17px 10px 30px;
+     background: #efefef;
+     line-height: 18px;
+}
+ .bwizard-steps .nav-item .nav-link .label {
+     margin: 0 5px 0 0;
+     padding: 1px 5px 2px;
+}
+ .bwizard-steps .nav-item:first-child .nav-link {
+     padding-left: 12px;
+     -moz-border-radius: 4px 0 0 4px;
+     -webkit-border-radius: 4px 0 0 4px;
+     border-radius: 4px 0 0 4px;
+}
+ .bwizard-steps .nav-item:first-child .nav-link:before {
+     border: none;
+}
+ .bwizard-steps .nav-item:last-child .nav-link {
+     margin-right: 0;
+     -moz-border-radius: 0 4px 4px 0;
+     -webkit-border-radius: 0 4px 4px 0;
+     border-radius: 0 4px 4px 0;
+}
+ .bwizard-steps .nav-item:last-child:after {
+     border: none;
+}
+ .bwizard-steps .nav-item .nav-link:before {
+     position: absolute;
+     left: 0;
+     top: 0;
+     height: 0;
+     width: 0;
+     border-bottom: 20px inset transparent;
+     border-left: 20px solid #fff;
+     border-top: 20px inset transparent;
+     content: "";
+}
+ .bwizard-steps .nav-item .nav-link:after {
+     position: absolute;
+     right: -20px;
+     top: 0;
+     height: 0;
+     width: 0;
+     border-bottom: 20px inset transparent;
+     border-left: 20px solid #efefef;
+     border-top: 20px inset transparent;
+     content: "";
+     z-index: 2;
+}
+ .bwizard-steps .nav-item .nav-link:hover {
+     text-decoration: none;
+}
+ .bwizard-steps .nav-item .nav-link.active {
+     color: #fff;
+     background: #007ACC;
+     cursor: default;
+}
+ .bwizard-steps .nav-item .nav-link.active:after {
+     border-left-color: #007ACC;
+}
+ .bwizard-steps .nav-item .nav-link.active .label {
+     background-color: #333;
+}
+ .bwizard-steps.clickable .nav-link:not(.active) {
+     cursor: pointer;
+}
+ .bwizard-steps.clickable .nav-link:hover:not(.active) {
+     background: #ccc;
+}
+ .bwizard-steps.clickable .nav-link:hover:not(.active):after {
+     border-left-color: #ccc;
+}
+ .bwizard-steps.clickable .nav-link:hover:not(.active) a {
+     color: #08c;
+}
+ @media (max-width: 760px) {
+    /* badges only on small screens */
+    .bwizard-steps .nav-item {
+         margin: 0;
+         margin-left: -4px;
+    }
+    .bwizard-steps .nav-item .nav-link {
+        padding-left: 12px;
+    }
+    .bwizard-steps .nav-item .nav-link:after, .bwizard-steps .nav-item .nav-link:before {
+        border: none;
+   }
+}
