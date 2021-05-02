@@ -37,13 +37,20 @@ var bootstrapWizardCreate = function(element, options) {
 		}
 
 		// See if we're currently in the first/last then disable the previous and last buttons
-		$($settings.previousSelector, element).toggleClass('disabled', (obj.firstIndex() >= obj.currentIndex()));
-		$($settings.nextSelector, element).toggleClass('disabled', (obj.currentIndex() >= obj.navigationLength()));
-		$($settings.nextSelector, element).toggleClass('hidden', (obj.currentIndex() >= obj.navigationLength() && $($settings.finishSelector, element).length > 0));
-		$($settings.lastSelector, element).toggleClass('hidden', (obj.currentIndex() >= obj.navigationLength() && $($settings.finishSelector, element).length > 0));
-		$($settings.finishSelector, element).toggleClass('hidden', (obj.currentIndex() < obj.navigationLength()));
+		$($settings.previousSelector, element).toggleClass('disabled', (obj.currentIndex() <= obj.firstIndex()));
+        $($settings.firstSelector, element).toggleClass('disabled', (obj.currentIndex() == obj.firstIndex()));
+		$($settings.nextSelector, element).toggleClass('disabled', (obj.currentIndex() >= obj.lastIndex()));
+        $($settings.lastSelector, element).toggleClass('disabled', (obj.currentIndex() == obj.lastIndex()));
 		$($settings.backSelector, element).toggleClass('disabled', (historyStack.length == 0));
-		$($settings.backSelector, element).toggleClass('hidden', (obj.currentIndex() >= obj.navigationLength() && $($settings.finishSelector, element).length > 0));
+
+        // if finish button exists, hide next, last, finish
+        if ($($settings.finishSelector, element).length > 0) {
+            $($settings.nextSelector, element).toggleClass('d-none', (obj.currentIndex() >= obj.lastIndex()));
+    		$($settings.lastSelector, element).toggleClass('d-none', (obj.currentIndex() == obj.lastIndex()));
+    		$($settings.finishSelector, element).toggleClass('d-none', (obj.currentIndex() < obj.lastIndex()));
+            $($settings.backSelector, element).toggleClass('d-none', (obj.currentIndex() >= obj.lastIndex()));
+        }
+
 
 		// We are unbinding and rebinding to ensure single firing and no double-click errors
 		obj.rebindClick($($settings.nextSelector, element), obj.next);
@@ -323,25 +330,25 @@ $.fn.bootstrapWizard = function(options) {
 
 // expose options
 $.fn.bootstrapWizard.defaults = {
-	withVisible:      true,
-	tabClass:         'nav nav-pills',
-	nextSelector:     '.wizard .next',
-	previousSelector: '.wizard .previous',
-	firstSelector:    '.wizard .first',
-	lastSelector:     '.wizard .last',
-  finishSelector:   '.wizard .finish',
-	backSelector:     '.wizard .back',
-	onShow:           null,
-	onInit:           null,
-	onNext:           null,
-	onPrevious:       null,
-	onLast:           null,
-	onFirst:          null,
-  onFinish:         null,
-  onBack:           null,
-	onTabChange:      null,
-	onTabClick:       null,
-	onTabShow:        null
+    withVisible:      true,
+    tabClass:         'nav nav-pills',
+    nextSelector:     '.wizard .next',
+    previousSelector: '.wizard .previous',
+    firstSelector:    '.wizard .first',
+    lastSelector:     '.wizard .last',
+    finishSelector:   '.wizard .finish',
+    backSelector:     '.wizard .back',
+    onShow:           null,
+    onInit:           null,
+    onNext:           null,
+    onPrevious:       null,
+    onLast:           null,
+    onFirst:          null,
+    onFinish:         null,
+    onBack:           null,
+    onTabChange:      null,
+    onTabClick:       null,
+    onTabShow:        null
 };
 
 })(jQuery);
