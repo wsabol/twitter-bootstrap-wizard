@@ -331,7 +331,7 @@ $.fn.bootstrapWizard = function(options) {
 // expose options
 $.fn.bootstrapWizard.defaults = {
     withVisible:      true,
-    tabClass:         'nav nav-tabs',
+    tabClass:         'nav nav-pills',
     nextSelector:     '.wizard .next',
     previousSelector: '.wizard .previous',
     firstSelector:    '.wizard .first',
