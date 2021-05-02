@@ -23,8 +23,7 @@ var bootstrapWizardCreate = function(element, options) {
 	var $activeTab = null;
 	var $navigation = null;
 
-	this.rebindClick = function(selector, fn)
-	{
+	this.rebindClick = function(selector, fn) {
 		selector.unbind('click', fn).bind('click', fn);
 	}
 
@@ -60,7 +59,7 @@ var bootstrapWizardCreate = function(element, options) {
 		obj.rebindClick($($settings.finishSelector, element), obj.finish);
 		obj.rebindClick($($settings.backSelector, element), obj.back);
 
-		if($settings.onTabShow && typeof $settings.onTabShow === 'function' && $settings.onTabShow($activeTab, $navigation, obj.currentIndex())===false){
+		if($settings.onTabShow && typeof $settings.onTabShow === 'function' && $settings.onTabShow.call(element[0], $activeTab, $navigation, obj.currentIndex())===false){
 			return false;
 		}
 	};
@@ -71,7 +70,7 @@ var bootstrapWizardCreate = function(element, options) {
 			return false;
 		}
 
-		if($settings.onNext && typeof $settings.onNext === 'function' && $settings.onNext($activeTab, $navigation, obj.nextIndex())===false){
+		if($settings.onNext && typeof $settings.onNext === 'function' && $settings.onNext.call(element[0], $activeTab, $navigation, obj.nextIndex())===false){
 			return false;
 		}
 
@@ -92,7 +91,7 @@ var bootstrapWizardCreate = function(element, options) {
 			return false;
 		}
 
-		if($settings.onPrevious && typeof $settings.onPrevious === 'function' && $settings.onPrevious($activeTab, $navigation, obj.previousIndex())===false){
+		if($settings.onPrevious && typeof $settings.onPrevious === 'function' && $settings.onPrevious.call(element[0], $activeTab, $navigation, obj.previousIndex())===false){
 			return false;
 		}
 
@@ -107,7 +106,7 @@ var bootstrapWizardCreate = function(element, options) {
 	};
 
 	this.first = function (e) {
-		if($settings.onFirst && typeof $settings.onFirst === 'function' && $settings.onFirst($activeTab, $navigation, obj.firstIndex())===false){
+		if($settings.onFirst && typeof $settings.onFirst === 'function' && $settings.onFirst.call(element[0], $activeTab, $navigation, obj.firstIndex())===false){
 			return false;
 		}
 
@@ -122,7 +121,7 @@ var bootstrapWizardCreate = function(element, options) {
 	};
 
 	this.last = function(e) {
-		if($settings.onLast && typeof $settings.onLast === 'function' && $settings.onLast($activeTab, $navigation, obj.lastIndex())===false){
+		if($settings.onLast && typeof $settings.onLast === 'function' && $settings.onLast.call(element[0], $activeTab, $navigation, obj.lastIndex())===false){
 			return false;
 		}
 
@@ -137,7 +136,7 @@ var bootstrapWizardCreate = function(element, options) {
 
 	this.finish = function (e) {
 	  if ($settings.onFinish && typeof $settings.onFinish === 'function') {
-	    $settings.onFinish($activeTab, $navigation, obj.lastIndex());
+	    $settings.onFinish.call(element[0], $activeTab, $navigation, obj.lastIndex());
 	  }
 	};
 
@@ -147,7 +146,7 @@ var bootstrapWizardCreate = function(element, options) {
 	  }
 
 	  var formerIndex = historyStack.pop();
-	  if ($settings.onBack && typeof $settings.onBack === 'function' && $settings.onBack($activeTab, $navigation, formerIndex) === false) {
+	  if ($settings.onBack && typeof $settings.onBack === 'function' && $settings.onBack.call(element[0], $activeTab, $navigation, formerIndex) === false) {
 	    historyStack.push(formerIndex);
 	    return false;
 	  }
@@ -214,10 +213,10 @@ var bootstrapWizardCreate = function(element, options) {
 	  }
 	};
 	this.disable = function (index) {
-		$navigation.find(baseItemSelector + ':eq('+index+')').addClass('disabled');
+		$navigation.find(baseItemSelector + ':eq('+index+') > a').addClass('disabled');
 	};
 	this.enable = function(index) {
-		$navigation.find(baseItemSelector + ':eq('+index+')').removeClass('disabled');
+		$navigation.find(baseItemSelector + ':eq('+index+') > a').removeClass('disabled');
 	};
 	this.hide = function(index) {
 		$navigation.find(baseItemSelector + ':eq('+index+')').hide();
@@ -245,7 +244,7 @@ var bootstrapWizardCreate = function(element, options) {
 		var $ul = $navigation.find(baseItemSelector);
 		var clickedIndex = $ul.index($(e.currentTarget).parent(baseItemSelector));
 		var $clickedTab = $( $ul[clickedIndex] );
-		if($settings.onTabClick && typeof $settings.onTabClick === 'function' && $settings.onTabClick($activeTab, $navigation, obj.currentIndex(), clickedIndex, $clickedTab)===false){
+		if($settings.onTabClick && typeof $settings.onTabClick === 'function' && $settings.onTabClick.call(element[0], $activeTab, $navigation, obj.currentIndex(), clickedIndex, $clickedTab)===false){
 		    return false;
 		}
 	};
@@ -259,7 +258,7 @@ var bootstrapWizardCreate = function(element, options) {
 			return false;
 		}
 
-		if($settings.onTabChange && typeof $settings.onTabChange === 'function' && $settings.onTabChange($activeTab, $navigation, obj.currentIndex(), nextTab)===false){
+		if($settings.onTabChange && typeof $settings.onTabChange === 'function' && $settings.onTabChange.call(element[0], $activeTab, $navigation, obj.currentIndex(), nextTab)===false){
 				return false;
 		}
 
@@ -293,12 +292,12 @@ var bootstrapWizardCreate = function(element, options) {
 
 	// Load onInit
 	if($settings.onInit && typeof $settings.onInit === 'function'){
-		$settings.onInit($activeTab, $navigation, 0);
+		$settings.onInit.call(element[0], $activeTab, $navigation, 0);
 	}
 
 	// Load onShow
 	if($settings.onShow && typeof $settings.onShow === 'function'){
-		$settings.onShow($activeTab, $navigation, obj.nextIndex());
+		$settings.onShow.call(element[0], $activeTab, $navigation, obj.nextIndex());
 	}
 
 	$('a[data-toggle="tab"]', $navigation).on('click', innerTabClick);
