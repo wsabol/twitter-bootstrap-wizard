@@ -17,6 +17,8 @@
     <h1>Multiple Wizards</h1>
 </div>
 
+<div id="root">
+
 <div id="rootwizard">
     <ul class="nav">
         <li class="nav-item">
@@ -280,6 +282,8 @@
     </nav>
 </div>
 
+</div>
+
 <h3 class="mt-5">HTML</h3>
 <pre id="prettydom" class="prettyprint linenums">
 </pre>
@@ -287,7 +291,121 @@
 <h3 class="mt-5">JS</h3>
 <pre class="prettyprint linenums">
 $(document).ready(function() {
-    $('#rootwizard').bootstrapWizard({'tabClass': 'nav nav-tabs'});
+    $('#rootwizard').bootstrapWizard({
+        debug: false,
+        onShow: function(tab, navigation, index) {
+			console.log(this.id, 'onShow');
+		},
+        onNext: function(tab, navigation, index) {
+			console.log(this.id, 'onNext');
+		},
+        onPrevious: function(tab, navigation, index) {
+			console.log(this.id, 'onPrevious');
+		},
+        onLast: function(tab, navigation, index) {
+			console.log(this.id, 'onLast');
+		},
+        onTabClick: function(tab, navigation, index) {
+			console.log(this.id, 'onTabClick');
+			alert('on tab click disabled');
+		},
+        onTabShow: function(tab, navigation, index) {
+			console.log(this.id, 'onTabShow');
+			var $total = navigation.find('li').length;
+			var $current = index+1;
+			var $percent = ($current/$total) * 100;
+            $(this).find('.progress-bar').css({width:$percent+'%'});
+		}
+    });
+
+	$('#tabs').bootstrapWizard({
+        tabClass: 'nav nav-tabs',
+        debug: false,
+        onShow: function(tab, navigation, index) {
+			console.log(this.id, 'onShow');
+		},
+        onNext: function(tab, navigation, index) {
+			console.log(this.id, 'onNext');
+		},
+        onPrevious: function(tab, navigation, index) {
+			console.log(this.id, 'onPrevious');
+		},
+        onLast: function(tab, navigation, index) {
+			console.log(this.id, 'onLast');
+		},
+        onTabClick: function(tab, navigation, index) {
+			console.log(this.id, 'onTabClick');
+			alert('on tab click disabled');
+		},
+        onTabShow: function(tab, navigation, index) {
+			console.log(this.id, 'onTabShow');
+			var $total = navigation.find('li').length;
+			var $current = index+1;
+			var $percent = ($current/$total) * 100;
+            $(this).find('.progress-bar').css({width:$percent+'%'});
+		}
+    });
+
+	$('#tabsleft').bootstrapWizard({
+        tabClass: 'nav nav-tabs justify-content-end',
+        debug: false,
+        onShow: function(tab, navigation, index) {
+			console.log(this.id, 'onShow');
+		},
+        onNext: function(tab, navigation, index) {
+			console.log(this.id, 'onNext');
+		},
+        onPrevious: function(tab, navigation, index) {
+			console.log(this.id, 'onPrevious');
+		},
+        onLast: function(tab, navigation, index) {
+			console.log(this.id, 'onLast');
+		},
+        onTabClick: function(tab, navigation, index) {
+			console.log(this.id, 'onTabClick');
+
+		},
+        onTabShow: function(tab, navigation, index) {
+			console.log(this.id, 'onTabShow');
+			var $total = navigation.find('li').length;
+			var $current = index+1;
+			var $percent = ($current/$total) * 100;
+            $(this).find('.progress-bar').css({width:$percent+'%'});
+		}
+    });
+
+	$('#withfinish').bootstrapWizard({
+        debug: false,
+        onShow: function(tab, navigation, index) {
+			console.log(this.id, 'onShow');
+		},
+        onNext: function(tab, navigation, index) {
+			console.log(this.id, 'onNext');
+		},
+        onPrevious: function(tab, navigation, index) {
+			console.log(this.id, 'onPrevious');
+		},
+        onLast: function(tab, navigation, index) {
+			console.log(this.id, 'onLast');
+		},
+        onTabClick: function(tab, navigation, index) {
+			console.log(this.id, 'onTabClick');
+			alert('on tab click disabled');
+			return false;
+		},
+        onTabShow: function(tab, navigation, index) {
+			console.log(this.id, 'onTabShow');
+			var $total = navigation.find('li').length;
+			var $current = index+1;
+			var $percent = ($current/$total) * 100;
+            $(this).find('.progress-bar').css({width:$percent+'%'});
+		},
+        onFinish: function(tab, navigation, index) {
+			console.log(this.id, 'onFinish');
+            alert('Finished!, Starting over!');
+            $(this).bootstrapWizard('first');
+		}
+    });
 });
 </pre>
 
@@ -411,9 +529,15 @@ $(document).ready(function() {
         onFinish: function(tab, navigation, index) {
 			console.log(this.id, 'onFinish');
             alert('Finished!, Starting over!');
-            $(this).data('bootstrapWizard').first();
+            $(this).bootstrapWizard('first');
 		}
     });
+
+    $('#prettydom').html(
+        $('#root').html().replace(/</g, '&lt;').trim()
+    );
+
+	window.prettyPrint && prettyPrint()
 
 });
 
