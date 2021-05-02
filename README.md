@@ -1,25 +1,22 @@
-Twitter Bootstrap Wizard
+
+Twitter Bootstrap4 Wizard
 ============================
 
-This Twitter Bootstrap plugin builds a wizard using a formatted tabbable structure. It allows to build a wizard functionality using buttons to go through the different wizard steps and using events allows to hook into each step individually.
+This Twitter Bootstrap4 plugin builds a wizard using a formatted tabbable structure. It allows to build a wizard functionality using buttons to go through the different wizard steps and using events allows to hook into each step individually.
 
-##### Note
- We will not longer be updating the bower version of bootstrap wizard or any other package manager. See <a href="https://github.com/VinceG/twitter-bootstrap-wizard/issues/81#issuecomment-42909528">#81</a> for the reason why. Please use 'master' branch instead.
-
-<a href="http://vinceg.github.io/twitter-bootstrap-wizard" target="_blank">Website & Demo</a>
-
-<a href='https://twitter.com/gabrielva' target='_blank'>Follow @gabrielva</a>
+<a href="http://wsabol.github.io/twitter-bootstrap4-wizard" target="_blank">Website & Demo</a>
 
 Requirements
 -------------
 
 * Requires jQuery v1.3.2 or later
-* Bootstrap 3.x
+* Bootstrap 4.0 or later
 
 Install
 -------------
 ```
-bower install twitter-bootstrap-wizard#1.3.2 --save 
+bower install twitter-bootstrap-wizard --save
+bower install twitter-bootstrap-wizard#1.4.2 --save
 ```
 
 Code Examples
@@ -33,20 +30,20 @@ $(document).ready(function() {
 ```
 
 ```javascript
-//wizard with options and events
+// wizard with options and events
 $(document).ready(function() {
 	$('#rootwizard').bootstrapWizard({
 		tabClass: 'nav nav-pills',
 		onNext: function(tab, navigation, index) {
 			alert('next');
-  		}
+  	}
   });
 });
 ```
 
 ```javascript
-//calling a method
-$('#rootwizard').bootstrapWizard('show',3);
+// calling a method
+$('#rootwizard').bootstrapWizard('show', 3);
 ```
 
 Options
@@ -244,13 +241,13 @@ Methods
 	</tbody>
 </table>
 
-<p>&copy; <a href='http://vadimg.com' target="_blank">Vadim Vincent Gabriel</a> <a href='https://twitter.com/gabrielva' target='_blank'>Follow @gabrielva</a> 2012</p>
+<p>&copy; <a href='https://willsabol.com' target="_blank">Will Sabol</a> 2021</p>
 
 License
 ===============
 The MIT License (MIT)
 
-Copyright (c) 2013 - Vincent Gabriel & Jason Gill
+Copyright (c) 2021 - Will Sabol
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

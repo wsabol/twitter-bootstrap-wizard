@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Wizard With Custom Tabs Example</title>
+    <title>Basic Tabs Example</title>
     <!-- Bootstrap -->
     <link href="//cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <!-- custom styles -->
     <link href="prettify.css" rel="stylesheet">
 </head>
 <body>
@@ -13,21 +14,35 @@
 <div style="padding-bottom: 9px;
     margin: 40px 0 20px;
     border-bottom: 1px solid #eee;">
-    <h1>Wizard With Custom Tabs Example</h1>
+    <h1>Basic Tabs Wizard</h1>
 </div>
 
 <div id="rootwizard">
-	<ul class="nav">
-	  	<li class="nav-item"><a class="nav-link" href="#tab1" data-toggle="tab">First</a></li>
-		<li class="nav-item"><a class="nav-link" href="#tab2" data-toggle="tab">Second</a></li>
-		<li class="nav-item"><a class="nav-link" href="#tab3" data-toggle="tab">Third</a></li>
-		<li class="nav-item"><a class="nav-link" href="#tab4" data-toggle="tab">Fourth</a></li>
-		<li class="nav-item"><a class="nav-link" href="#tab5" data-toggle="tab">Fifth</a></li>
-		<li class="nav-item"><a class="nav-link" href="#tab6" data-toggle="tab">Sixth</a></li>
-		<li class="nav-item"><a class="nav-link" href="#tab7" data-toggle="tab">Seventh</a></li>
-	</ul>
-	<div class="tab-content">
-        <div class="tab-pane" id="tab1">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link active" href="#tab1" data-toggle="tab">First</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#tab2" data-toggle="tab">Second</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#tab3" data-toggle="tab">Third</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#tab4" data-toggle="tab">Fourth</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#tab5" data-toggle="tab">Fifth</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#tab6" data-toggle="tab">Sixth</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#tab7" data-toggle="tab">Seventh</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab1">
             1
         </div>
         <div class="tab-pane" id="tab2">
@@ -48,10 +63,16 @@
         <div class="tab-pane" id="tab7">
             7
         </div>
-	</div>
+    </div>
     <nav>
-        <input type='button' class='btn btn-secondary button-next float-right' name='next' value='Next' />
-        <input type='button' class='btn btn-secondary button-previous' name='previous' value='Previous' />
+        <ul class="pagination wizard">
+            <li class="page-item previous">
+                <a class="page-link" href="javascript:;">Previous</a>
+            </li>
+            <li class="page-item next">
+                <a class="page-link" href="javascript:;">Next</a>
+            </li>
+        </ul>
     </nav>
 </div>
 
@@ -62,7 +83,7 @@
 <h3 class="mt-5">JS</h3>
 <pre class="prettyprint linenums">
 $(document).ready(function() {
-  	$('#rootwizard').bootstrapWizard({'nextSelector': '.button-next', 'previousSelector': '.button-previous'});
+    $('#rootwizard').bootstrapWizard({'tabClass': 'nav nav-tabs'});
 });
 </pre>
 
@@ -74,7 +95,7 @@ $(document).ready(function() {
 <script src="prettify.js"></script>
 <script>
 $(document).ready(function() {
-    $('#rootwizard').bootstrapWizard({'nextSelector': '.button-next', 'previousSelector': '.button-previous'});
+  	$('#rootwizard').bootstrapWizard({'tabClass': 'nav nav-tabs'});
 
     $('#prettydom').html(
         '&lt;div id="rootwizard">'
