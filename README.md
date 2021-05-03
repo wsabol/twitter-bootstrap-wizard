@@ -26,12 +26,12 @@ $(document).ready(function() {
 ```javascript
 // wizard with options and events
 $(document).ready(function() {
-	$('#rootwizard').bootstrapWizard({
-		tabClass: 'nav nav-pills',
-		onNext: function(tab, navigation, index) {
-			alert('next');
-  	}
-  });
+    $('#rootwizard').bootstrapWizard({
+        tabClass: 'nav nav-pills',
+        onNext: function(tab, navigation, index) {
+            alert('next');
+        }
+    });
 });
 ```
 
