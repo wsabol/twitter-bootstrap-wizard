@@ -12,12 +12,6 @@ Requirements
 * Requires jQuery v1.3.2 or later
 * Bootstrap 4.0 or later
 
-Install
--------------
-```
-bower install twitter-bootstrap-wizard --save
-bower install twitter-bootstrap-wizard#1.4.2 --save
-```
 
 Code Examples
 -------------
